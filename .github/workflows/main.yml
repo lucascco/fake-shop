@@ -1,0 +1,20 @@
+name: CI-CD
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Autenticar noDocker Hub
+        run: echo "Docker Login"
+      - name: Consturação e envio da imagem docker
+        run: echo "Docker push"
+
+  cd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Autenticar na AWS
+        run: echo "Executando o camando AWS configure"
