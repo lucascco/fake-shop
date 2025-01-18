@@ -18,7 +18,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: src/Dockerfile
+          context: ./src
           push: true
           tags: |
             lucasccorrea/fake-shop:v${{github.run_number}}
