@@ -8,10 +8,21 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
-      - name: Autenticar noDocker Hub
-        run: echo "Docker Login"
-      - name: Consturação e envio da imagem docker
-        run: echo "Docker push"
+      - name: Pegar os arquivos
+        uses: actions/checkout@v4
+      - name: Autenticar no Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          context: ./src/Dockerfile
+          push: true
+          tags: |
+            lucasccorrea/fake-shop:v${{github.run_number}}
+            lucasccorrea/fake-shop:latest
 
   cd:
     runs-on: ubuntu-latest
